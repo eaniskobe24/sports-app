@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --tab-bar-height: 80px;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  background-color: #000000;
+}
+
+body {
+  background-color: #000000;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Custom scrollbar for webkit - hidden by default */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Selection color */
+::selection {
+  background-color: rgba(10, 132, 255, 0.3);
+}
+
+/* Smooth transitions for interactive elements */
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Tab bar safe area */
+.pb-tab-bar {
+  padding-bottom: calc(var(--tab-bar-height) + env(safe-area-inset-bottom));
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(28, 28, 30, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.glass-heavy {
+  background: rgba(28, 28, 30, 0.95);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+}
+
+/* Live glow effect */
+@keyframes live-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(255, 59, 48, 0); }
+}
+
+.live-glow {
+  animation: live-glow 2s ease-in-out infinite;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #0a84ff 0%, #bf5af2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Score flash animation */
+@keyframes score-flash {
+  0% { color: #ffffff; }
+  30% { color: #30d158; transform: scale(1.15); }
+  100% { color: #ffffff; transform: scale(1); }
+}
+
+.score-flash {
+  animation: score-flash 0.8s ease-out;
+}
+
+/* Streaming text cursor */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.streaming-cursor::after {
+  content: '▊';
+  animation: cursor-blink 0.8s ease-in-out infinite;
+  color: #0a84ff;
+}
+
+/* Dot separator */
+.dot-sep::before {
+  content: '·';
+  margin: 0 6px;
+  color: #636366;
+}
