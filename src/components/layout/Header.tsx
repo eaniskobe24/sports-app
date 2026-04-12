@@ -1,13 +1,16 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { ChevronLeft, Settings } from 'lucide-react'
+import { ChevronLeft, Settings, Eye, EyeOff } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import { useSpoiler } from '@/contexts/SpoilerContext'
 
 interface HeaderProps {
   title?: string
   showBack?: boolean
   showSettings?: boolean
+  showSpoilerToggle?: boolean
   transparent?: boolean
   rightElement?: React.ReactNode
   className?: string
@@ -17,11 +20,13 @@ export default function Header({
   title,
   showBack = false,
   showSettings = false,
+  showSpoilerToggle = false,
   transparent = false,
   rightElement,
   className,
 }: HeaderProps) {
   const router = useRouter()
+  const { spoilerShield, toggleSpoilerShield } = useSpoiler()
 
   return (
     <div
@@ -60,8 +65,61 @@ export default function Header({
         </div>
 
         {/* Right */}
-        <div className="w-10 flex justify-end">
+        <div className="w-auto flex items-center justify-end gap-2">
+          {/* Spoiler shield toggle — shown on home page */}
+          {showSpoilerToggle && (
+            <motion.button
+              whileTap={{ scale: 0.85 }}
+              onClick={toggleSpoilerShield}
+              className="flex items-center gap-1 px-2 py-1 rounded-full transition-all duration-200"
+              style={{
+                backgroundColor: spoilerShield
+                  ? 'rgba(10,132,255,0.18)'
+                  : 'rgba(255,255,255,0.06)',
+                border: spoilerShield
+                  ? '1px solid rgba(10,132,255,0.35)'
+                  : '1px solid rgba(255,255,255,0.08)',
+              }}
+              title={spoilerShield ? 'Spoiler Shield ON — tap to disable' : 'Enable Spoiler Shield'}
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                {spoilerShield ? (
+                  <motion.span key="off"
+                    initial={{ rotate: -20, opacity: 0 }}
+                    animate={{ rotate: 0,   opacity: 1 }}
+                    exit={{   rotate:  20,  opacity: 0 }}
+                    transition={{ duration: 0.15 }}
+                  >
+                    <EyeOff size={14} className="text-[#0a84ff]" />
+                  </motion.span>
+                ) : (
+                  <motion.span key="on"
+                    initial={{ rotate: 20,  opacity: 0 }}
+                    animate={{ rotate: 0,   opacity: 1 }}
+                    exit={{   rotate: -20,  opacity: 0 }}
+                    transition={{ duration: 0.15 }}
+                  >
+                    <Eye size={14} className="text-[#636366]" />
+                  </motion.span>
+                )}
+              </AnimatePresence>
+              <AnimatePresence>
+                {spoilerShield && (
+                  <motion.span
+                    initial={{ width: 0, opacity: 0 }}
+                    animate={{ width: 'auto', opacity: 1 }}
+                    exit={{   width: 0, opacity: 0 }}
+                    className="text-[10px] font-bold text-[#0a84ff] overflow-hidden whitespace-nowrap"
+                  >
+                    Shield
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </motion.button>
+          )}
+
           {rightElement}
+
           {showSettings && !rightElement && (
             <button
               className="text-[#636366] active:opacity-50 transition-opacity"

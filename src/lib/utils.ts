@@ -1,6 +1,43 @@
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
-import type { Sport, GameStatus, VoiceStyle } from '@/types'
+import type { Sport, GameStatus, VoiceStyle, Game } from '@/types'
+
+export type GameIntensity = 'fire' | 'clutch' | 'close' | 'tied' | null
+
+/**
+ * Returns how exciting a live game is based on score margin + game clock.
+ * Used for the Heat Badge — visible even when Spoiler Shield is active.
+ *
+ * fire   = tied OR within margin AND late game (final period/OT)
+ * clutch = close AND late game
+ * close  = within margin, early game
+ * tied   = tied, early game
+ * null   = not live, or blowout
+ */
+export function getGameIntensity(game: Game): GameIntensity {
+  if (game.status !== 'live') return null
+
+  const { home, away } = game.score
+  const diff = Math.abs(home - away)
+  const tied = diff === 0
+  const close = isGameClose(home, away, game.sport)
+
+  if (!close && !tied) return null
+
+  // Detect late game from the period string
+  const p = game.period.toUpperCase()
+  const isLate =
+    p.includes('Q4') || p.includes('4TH') ||
+    p.includes('OT') ||
+    (p.includes('3RD') && (game.sport === 'NHL' || game.sport === 'Soccer')) ||
+    p.includes('9TH') || p.includes('8TH') || p.includes('7TH') ||
+    (p.includes('2ND') && game.sport === 'Soccer')
+
+  if (tied && isLate) return 'fire'
+  if (close && isLate) return 'clutch'
+  if (tied) return 'tied'
+  return 'close'
+}
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))

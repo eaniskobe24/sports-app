@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
+import Providers from '@/components/layout/Providers'
 
 export const metadata: Metadata = {
   title: 'GameCast — Live Sports + AI Commentary',
@@ -26,10 +27,12 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </head>
       <body className="bg-black text-white font-sans antialiased min-h-screen">
-        {/* App shell — max width for mobile-first feel */}
-        <div className="mx-auto max-w-[428px] min-h-screen relative bg-black">
-          {children}
-        </div>
+        <Providers>
+          {/* App shell — max width for mobile-first feel */}
+          <div className="mx-auto max-w-[428px] min-h-screen relative bg-black">
+            {children}
+          </div>
+        </Providers>
         {/* Desktop background glow */}
         <div
           className="fixed inset-0 -z-10 pointer-events-none hidden lg:block"
