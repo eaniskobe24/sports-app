@@ -1,0 +1,42 @@
+{
+  "name": "GameCast — Live Sports + AI Commentary",
+  "short_name": "GameCast",
+  "description": "Real-time sports scores with AI-powered live voice commentary. Works in the background so you never miss a play.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "categories": ["sports", "entertainment", "news"],
+  "lang": "en-US",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Live Games",
+      "url": "/live",
+      "description": "View all live games right now"
+    },
+    {
+      "name": "Top Plays",
+      "url": "/highlights",
+      "description": "Watch the best plays"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

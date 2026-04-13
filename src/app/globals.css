@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --tab-bar-height: 80px;
+  --tab-bar-height:      80px;   /* updated by AudioPlayerContext when MiniPlayer is visible */
+  --tab-bar-base:        80px;   /* constant — always the actual tab bar height */
+  --mini-player-height:  68px;
 }
 
 * {
@@ -230,6 +232,12 @@ button, a {
 
 .score-reveal {
   animation: score-reveal 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* ─── MiniPlayer slide-up ────────────────────────────────── */
+@keyframes mini-player-in {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
 }
 
 /* ─── Heat badge pulse (fire games) ─────────────────────── */

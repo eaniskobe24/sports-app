@@ -214,7 +214,7 @@ export default function ProfilePage() {
         {/* About */}
         <SectionHeader title="About" />
         <div className="mx-4 bg-[#1c1c1e] rounded-2xl overflow-hidden divide-y divide-[#38383a]/50">
-          <button className="w-full flex items-center justify-between px-4 py-3.5">
+          <a href="/privacy" className="w-full flex items-center justify-between px-4 py-3.5">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-xl bg-[#2c2c2e] flex items-center justify-center">
                 <Shield size={16} className="text-[#8e8e93]" />
@@ -222,7 +222,7 @@ export default function ProfilePage() {
               <span className="text-[14px] text-white">Privacy Policy</span>
             </div>
             <ChevronRight size={16} className="text-[#636366]" />
-          </button>
+          </a>
           <button className="w-full flex items-center justify-between px-4 py-3.5">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-xl bg-[#2c2c2e] flex items-center justify-center">
@@ -238,12 +238,25 @@ export default function ProfilePage() {
         <div className="mx-4 mt-4 mb-2 p-4 bg-gradient-to-br from-[#1c1c1e] to-[#0a1628] rounded-2xl border border-[#0a84ff]/15">
           <div className="flex items-center gap-2 mb-2">
             <span className="text-[14px]">🤖</span>
-            <p className="text-[12px] font-semibold text-[#0a84ff]">Powered by Claude</p>
+            <p className="text-[12px] font-semibold text-[#0a84ff]">Powered by AI</p>
           </div>
           <p className="text-[11px] text-[#636366] leading-relaxed">
-            AI GameCaster uses Claude Opus 4.6 to generate real-time sports commentary.
-            Requires an Anthropic API key to be configured in your environment.
+            Commentary text: Claude Opus 4.6 by Anthropic.{'\n'}
+            Live voice: ElevenLabs TTS (Adam · Sam · Rachel).{'\n'}
+            Auto Cast runs in the background — keeps narrating even when you browse other screens.
           </p>
+          <div className="flex items-center gap-3 mt-3 pt-3 border-t border-[#38383a]/40">
+            {[
+              { icon: '🚫', label: 'No ads' },
+              { icon: '🎲', label: 'No betting' },
+              { icon: '🔒', label: 'No tracking' },
+            ].map(({ icon, label }) => (
+              <div key={label} className="flex items-center gap-1">
+                <span className="text-[11px]">{icon}</span>
+                <span className="text-[10px] text-[#636366]">{label}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
