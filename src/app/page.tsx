@@ -9,6 +9,7 @@ import GameCard from '@/components/games/GameCard'
 import LiveIndicator from '@/components/ui/LiveIndicator'
 import { getLiveGames, getUpcomingGames, getFinalGames, getFeaturedGame } from '@/lib/mockData'
 import { getSportIcon, getGameIntensity } from '@/lib/utils'
+import type { Sport } from '@/types'
 import { useSpoiler } from '@/contexts/SpoilerContext'
 import Link from 'next/link'
 
@@ -207,7 +208,7 @@ export default function HomePage() {
                     : { backgroundColor: 'rgba(255,255,255,0.06)', color: '#636366' }
                 }
               >
-                {sport !== 'All' && <span>{getSportIcon(sport as any)}</span>}
+                {sport !== 'All' && <span>{getSportIcon(sport as Sport)}</span>}
                 {sport}
               </motion.button>
             ))}
@@ -284,7 +285,7 @@ export default function HomePage() {
 
         {filteredLive.length === 0 && filteredUpcoming.length === 0 && filteredFinal.length === 0 && (
           <div className="flex flex-col items-center justify-center py-16 px-8 text-center">
-            <span className="text-[40px] mb-3">{getSportIcon(filter as any) || '🏆'}</span>
+            <span className="text-[40px] mb-3">{filter !== 'All' ? getSportIcon(filter as Sport) : '🏆'}</span>
             <p className="text-[14px] font-medium text-[#48484a]">No {filter} games today</p>
           </div>
         )}

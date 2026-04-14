@@ -171,7 +171,7 @@ export function AudioPlayerProvider({ children }: { children: ReactNode }) {
       audio.setAttribute('preload', 'auto')
       audioRef.current = audio
 
-      registerMediaSessionHandlers(audio, isAutoCastRef.current ? triggerNextNow : undefined)
+      registerMediaSessionHandlers(audio, () => { if (isAutoCastRef.current) triggerNextNow() })
 
       audio.onplay   = () => setAudioState('playing')
       audio.onpause  = () => {

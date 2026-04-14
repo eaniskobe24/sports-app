@@ -95,6 +95,7 @@ export default function MiniPlayer() {
     <AnimatePresence>
       {visible && (
         <motion.div
+          key="mini-player"
           initial={{ y: 80,  opacity: 0 }}
           animate={{ y: 0,   opacity: 1 }}
           exit={{   y: 80,  opacity: 0 }}
