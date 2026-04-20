@@ -2,12 +2,12 @@
 
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { Zap, Trophy, Target } from 'lucide-react'
+import { Zap, Trophy } from 'lucide-react'
 import Header from '@/components/layout/Header'
 import TabBar from '@/components/layout/TabBar'
 import { games } from '@/lib/mockData'
 import { getSportIcon, getSportAccentColor } from '@/lib/utils'
-import type { KeyMoment } from '@/types'
+import type { KeyMoment, Sport } from '@/types'
 
 interface HighlightItem {
   gameId: string
@@ -112,7 +112,7 @@ export default function HighlightsPage() {
                   <div className="flex-1 min-w-0">
                     {/* Game ref */}
                     <div className="flex items-center gap-1.5 mb-1">
-                      <span className="text-[11px]">{getSportIcon(h.sport as any)}</span>
+                      <span className="text-[11px]">{getSportIcon(h.sport as Sport)}</span>
                       <span className="text-[10px] text-[#636366] font-medium uppercase tracking-wide">
                         {h.awayTeam} vs {h.homeTeam}
                       </span>
